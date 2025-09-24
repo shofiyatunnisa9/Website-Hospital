@@ -6,7 +6,7 @@ use App\Models\Specialist;
 
 class SpecialistRepository
 {
-    public function gelAll(array $fields)
+    public function getAll(array $fields)
     {
         return Specialist::select($fields)->latest()->with(['hospitals', 'doctors'])->paginate(10);
     }
