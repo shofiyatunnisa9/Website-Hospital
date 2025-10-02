@@ -44,7 +44,7 @@ class SpecialistController extends Controller
         return response()->json(new SpecialistResource($specialist), 201);
     }
 
-    public function update(SpecialistService $request, int $id)
+    public function update(SpecialistRequest $request, int $id)
     {
         try {
             $specialist = $this->specialistService->update($id, $request->validated());

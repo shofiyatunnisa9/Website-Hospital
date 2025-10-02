@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SpecialistRequest extends FormRequest
+class HospitalRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,13 +21,15 @@ class SpecialistRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('specialist');
-
+        $id = $this->route('hospital');
         return [
-            'name' => 'required|string|unique:specialists,name,' . $id,
+            'name' => 'required|string|unique:hospitals,name,' . $id,
             'photo' => $this->isMethod('post') ? 'requred|image|max:2048' : 'sometimes|image|max:2048',
             'about' => 'required|string',
-            'price' => 'required|numeric|min:0',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'post_code' => 'required|string',
+            'phone' => 'required|string',
         ];
     }
 }
