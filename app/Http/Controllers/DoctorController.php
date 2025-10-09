@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DoctorRequest;
+use App\Http\Requests\SpecialistHospitalDoctorRequest;
 use App\Http\Resources\DoctorResource;
 use App\Services\DoctorService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -71,12 +72,10 @@ class DoctorController extends Controller
         }
     }
 
-    public function filterBySpecialistAndHospital(Request $request) //bisa dipisah
+    public function filterBySpecialistAndHospital(SpecialistHospitalDoctorRequest $request) //bisa dipisah
     {
-        $validated = $request->validate([
-            'hospital_id' => 'required|integer|exists:hospitals,id',
-            'specialist_id' => 'required|integer|specialists,id'
-        ]);
+
+        $validated = $request->validated();
 
         $doctors = $this->doctorService->filterBySpecialistAndHospital(
             $validated['hospital_id'],
@@ -89,6 +88,7 @@ class DoctorController extends Controller
     {
         try {
             $availability = $this->doctorService->getAvailableSlots($doctorId);
+            return response()->json(new DoctorResource($availability));
         } catch (ModelNotFoundException $e) {
 
             return response()->json(['message' => 'Doctor not found'], 404);

@@ -23,12 +23,12 @@ class DoctorRequest extends FormRequest
     {
         $id = $this->route('doctor');
         return [
-            'name' => 'required|string|unique:doctors, name,' . $id,
-            'photo' => $this->isMethod('post') ? 'requred|image|max:2048' : 'sometimes|image|max:2048',
+            'name' => 'required|string|unique:doctors,name,' . $id,
+            'photo' => $this->isMethod('post') ? 'required|image|max:2048' : 'sometimes|image|max:2048',
             'about' => 'required|string',
             'yoe' => 'required|integer|min:0',
             'specialist_id' => 'required|exists:specialists,id',
-            'hospital_id' => 'required|exists:hospitals,is',
+            'hospital_id' => 'required|exists:hospitals,id',
             'gender' => 'required|in:Male,Female',
 
         ];

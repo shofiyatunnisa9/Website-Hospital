@@ -25,7 +25,6 @@ class BookingTransactionRequest extends FormRequest
     {
         return [
             'doctor_id' => ['required', 'exists:doctors,id'],
-
             'started_at' => [
                 'required',
                 'date',

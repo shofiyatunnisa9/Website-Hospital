@@ -2,17 +2,17 @@
 
 namespace App\Services;
 
-use App\Repositories\HostpitalRepository;
+use App\Repositories\HospitalRepository;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Session\Store;
+use Illuminate\Support\Facades\Storage;
 
 class HospitalService
 {
     private $hospitalRepository;
 
-    public function __construct(HostpitalRepository $hostpitalRepository)
+    public function __construct(HospitalRepository $hospitalRepository)
     {
-        $this->hospitalRepository = $hostpitalRepository;
+        $this->hospitalRepository = $hospitalRepository;
     }
 
 
@@ -71,15 +71,15 @@ class HospitalService
     private function deletePhoto(string $photoPath)
     {
         $relativePath = 'hospitals/' . basename($photoPath);
-        if (Store::disk('public')->exists($relativePath)) {
-            Store::disk('public')->delete($relativePath);
+        if (Storage::disk('public')->exists($relativePath)) {
+            Storage::disk('public')->delete($relativePath);
         }
     }
 
     public function attacchSpecialist(int $hospitalId, int $specialistId)
     {
         $hospital = $this->hospitalRepository->getById($hospitalId, ['id']);
-        $hospital->specialist()->syncWithoutDetaching($specialistId);
+        $hospital->specialists()->syncWithoutDetaching($specialistId);
     }
 
     public function detachSpecialist(int $hospitalId, int $specialistId)

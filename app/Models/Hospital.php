@@ -31,7 +31,7 @@ class Hospital extends Model
 
     public function specialists()
     {
-        return $this->belongsToMany(Specialist::class, 'hospital_specialist');
+        return $this->belongsToMany(Specialist::class, 'hospital_specialists');
     }
 
     public function getPhotoAttribute($value)

@@ -63,9 +63,9 @@ class DoctorService
     public function delete(int $id)
     {
 
-        $$doctor = $this->doctorRepository->getById($id, ['*']);
+        $doctor = $this->doctorRepository->getById($id, ['*']);
 
-        if ($$doctor->photo) {
+        if ($doctor->photo) {
             $this->deletePhoto($doctor->photo);
         }
         $this->doctorRepository->delete($id);

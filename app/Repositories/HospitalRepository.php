@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Hospital;
 
-class HostpitalRepository
+class HospitalRepository
 {
     public function getAll(array $fields)
     {
@@ -23,9 +23,9 @@ class HostpitalRepository
 
     public function update(int $id, array $data)
     {
-        $hostpital = Hospital::findOrFail($id);
-        $hostpital->update($data);
-        return $hostpital;
+        $hospital = Hospital::findOrFail($id);
+        $hospital->update($data);
+        return $hospital;
     }
 
     public function delete(int $id)

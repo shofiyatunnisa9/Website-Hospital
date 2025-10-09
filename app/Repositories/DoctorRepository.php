@@ -13,7 +13,7 @@ class DoctorRepository
 
     public function getById(int $id, array $fields)
     {
-        return Doctor::select($fields)->with(['specialist', 'hospital', 'bookingTransactions.user'])->findOrFail($id);
+        return Doctor::select($fields)->with(['specialist', 'hospital', 'bookingTransactions.user'])->find($id);
     }
 
     public function create(array $data)

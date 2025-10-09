@@ -64,7 +64,14 @@ class BookingTransactionService
             ]);
         }
 
+        // $doctor = $this->doctorRepository->getById($data['doctor_id'], ['*']);
         $doctor = $this->doctorRepository->getById($data['doctor_id'], ['*']);
+
+        if (!$doctor) {
+            throw ValidationException::withMessages([
+                'doctor_id' => ['Doctor not found.']
+            ]);
+        }
 
         $price = $doctor->specialist->price;
         $tax = (int) round($price * 0.11);
